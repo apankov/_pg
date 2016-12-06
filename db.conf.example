@@ -1,0 +1,12 @@
+# Please create DB configration file with your credentials.
+# You can use db.conf.example as template:
+# cp db.conf.example db.conf
+
+DBNAME=shiptify
+DBUSER=postgres
+DBPASS=linux
+DBHOST=192.168.99.100
+DBPORT=5432
+DBDUMP=$DIR/dump.sql
+
+DOCKER_POSTGRESQLD_CONTAINER=postgresqld

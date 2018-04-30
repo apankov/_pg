@@ -24,7 +24,16 @@ exit
 
 docker run \
     -it \
-    --link postgresqld:postgres \
+    --link $DOCKER_POSTGRESQLD_CONTAINER:postgres \
     --rm \
     postgres sh -c 'exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres '$DBNAME
+
+
+# docker run \
+# 	-it \
+# 	--name postgres-console \
+# 	--link postgresqld:postgres \
+# 	--rm \
+# 	-d \
+# 	postgres
 

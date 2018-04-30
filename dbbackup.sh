@@ -12,18 +12,19 @@ fi
 . $DIR/lib.sh
 
 
+now=`date +'%Y-%m-%d_%H-%M-%S'`
+
+
 
 docker run \
     -it \
     --link $DOCKER_POSTGRESQLD_CONTAINER:postgres \
     --rm \
-    postgres sh -c 'exec pg_dump -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres '$DBNAME
+    postgres sh -c 'exec pg_dump -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U '$DBUSER' '$DBNAME > $DBNAME-$now.sql
 
 
-# docker run \
-# 	-it \
-# 	--name postgres-console \
-# 	--link postgresqld:postgres \
-# 	--rm \
-# 	-d \
-# 	postgres
+
+# PGPASSWORD="$DBPASS" pg_dump -h $DBHOST -U $DBUSER $DBNAME > $DBNAME-$now.sql
+
+bzip2 -9    $DBNAME-$now.sql
+
